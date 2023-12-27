@@ -6,6 +6,7 @@ public abstract class Enemy_Base : MonoBehaviour
 {
     [SerializeField] protected float moveTime;
     [SerializeField] private float tirggerTiming;
+    public int curDir;
     private bool isTirgger;
     protected Coroutine startMove;
 
@@ -39,8 +40,8 @@ public abstract class Enemy_Base : MonoBehaviour
         isTirgger = true;
     }
 
-    public void Destory()
+    public void DieDestory()
     {
-
+        Destroy(gameObject);
     }
 }

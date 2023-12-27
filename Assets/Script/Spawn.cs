@@ -10,7 +10,8 @@ public class Spawn : MonoBehaviour
     float curDelay;
 
     private void Update() {
-        if(Input.GetKeyDown(KeyCode.T)) SpawnEnemy();
+        curDelay += Time.deltaTime;
+        if(curDelay >= maxDelay) SpawnEnemy();
     }
 
     private void SpawnEnemy()
@@ -18,6 +19,8 @@ public class Spawn : MonoBehaviour
         int ranPos = Random.Range(0, pos.Count);
         int ranEnemy = Random.Range(0, enemy.Count);
 
-        Instantiate(enemy[ranEnemy], pos[ranPos].position, Quaternion.identity);
+        var temp = Instantiate(enemy[ranEnemy], pos[ranPos].position, Quaternion.identity).GetComponent<Enemy_Base>();
+        temp.curDir = ranPos;
+        curDelay = 0;
     }
 }

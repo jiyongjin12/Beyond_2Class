@@ -7,8 +7,15 @@ public class Shield : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private float plusPos;
     [SerializeField] private float moveTime;
+    [SerializeField] private CheckBox checkBox;
     private Vector3 curPos;
     bool isMove;
+
+    private void Start()
+    {
+        Block(0);
+        checkBox.GetComponent<BoxCollider2D>().size = new Vector2(plusPos * 2, plusPos * 2);
+    }
 
     private void Update()
     {
@@ -38,6 +45,7 @@ public class Shield : MonoBehaviour
 
         curPos = targetPos;
         StartCoroutine(Move(targetPos, PlusPos(transform.position, targetPos), moveTime));
+        checkBox.InputDir(dir);
     }
 
     private List<Vector3> PlusPos(Vector3 origPos, Vector3 targetPos)
@@ -85,6 +93,9 @@ public class Shield : MonoBehaviour
         }
 
         transform.position = targetPos;
+        direction = player.transform.position - transform.position;
+        z = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, z - 90f);
         isMove = false;
     }
 

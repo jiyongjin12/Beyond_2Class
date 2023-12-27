@@ -11,6 +11,7 @@ public class TirggerEnemy_Base : Enemy_Base
     {
         base.Start();
         pos.Add(PlusPos());
+        curDir = (curDir % 2 == 0) ? curDir + 1 : curDir - 1;
     }
 
     protected override void Tirgger(Vector3 startPos, float curTime)
