@@ -14,8 +14,8 @@ public class FakeEnemy : Enemy_Base
         moveTime = moveTime / 2;
         tirggerTiming = moveTime / 2;
         pos.Add(PlusPos());
-        curDir = (curDir % 2 == 0) ? curDir + 1 : curDir - 1;
-        startMove = StartCoroutine(Move(transform.position, 0, moveTime));
+        //curDir = (curDir % 2 == 0) ? curDir + 1 : curDir - 1;
+        startMove = StartCoroutine(Move(-transform.position, 0, moveTime));
     }
 
     protected override IEnumerator Move(Vector3 startPos, float startTime, float sec)

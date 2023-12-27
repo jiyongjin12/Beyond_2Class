@@ -16,8 +16,8 @@ public class CheckBox : MonoBehaviour
         var temp = other.GetComponent<Enemy_Base>();
 
         if (temp.curDir == dir)
-            if (temp.isBenefit) Debug.Log("S_Good");
-            else Debug.Log("S_Bad");
+            if (temp.isBenefit) Debug.Log("S_Bad");
+            else Debug.Log("S_Good");
         else return;
 
         temp.DieDestory();
