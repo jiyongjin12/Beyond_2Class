@@ -6,6 +6,6 @@ public class ChargingEnemy : Enemy_Base
 {
     protected override float EasingValue(float value)
     {
-        return Easing.easeInBack(value);
+        return Easing.easeInOutQuint(value);
     }
 }
