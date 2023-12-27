@@ -8,6 +8,13 @@ public class Easing : MonoBehaviour
     public static float easeOutQuint(float x) => 1 - Mathf.Pow(1 - x, 5);
     public static float easeOutSine(float x) => Mathf.Sin((x * Mathf.PI) / 2);
     public static float easeInOutQuart(float x) => x < 0.5 ? 8 * x * x * x * x : 1 - Mathf.Pow(-2 * x + 2, 4) / 2;
+    public static float easeInBack(float x)
+    {
+        float c1 = 1.70158f;
+        float c3 = c1 + 1;
+
+        return c3 * x * x * x - c1 * x * x;
+    }
     public static float easeOutBack(float x)
     {
         float c1 = 1.70158f;

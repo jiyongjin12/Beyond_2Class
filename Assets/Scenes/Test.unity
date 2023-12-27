@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 11238755}
   - component: {fileID: 11238754}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,7 +158,9 @@ MonoBehaviour:
   - {fileID: 1372169668}
   - {fileID: 550155052}
   enemy:
+  - {fileID: 2216066360230247799, guid: 51b9e8911a579f141913778a59e98d85, type: 3}
   - {fileID: 352154306053263818, guid: f27fdea5d18e9704a8f22c2008d23f55, type: 3}
+  - {fileID: 9072466187021109438, guid: 2ca521570e897dd4e9d28d6c43933c6e, type: 3}
   maxDelay: 1
 --- !u!4 &11238755
 Transform:
@@ -211,7 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 660273174}
   plusPos: 0.75
-  moveTime: 0.15
+  moveTime: 0.075
   checkBox: {fileID: 2050163676}
 --- !u!212 &223135471
 SpriteRenderer:

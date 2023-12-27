@@ -2,23 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TirggerEnemy_Base : Enemy_Base
+public class FakeEnemy : Enemy_Base
 {
     public List<Vector3> pos;
     [SerializeField] private float plusPos;
+    private float tirggerTiming;
+    private bool isTirgger;
 
     protected override void Start()
     {
-        base.Start();
+        moveTime = moveTime / 2;
+        tirggerTiming = moveTime / 2;
         pos.Add(PlusPos());
         curDir = (curDir % 2 == 0) ? curDir + 1 : curDir - 1;
+        startMove = StartCoroutine(Move(transform.position, 0, moveTime));
     }
 
-    protected override void Tirgger(Vector3 startPos, float curTime)
+    protected override IEnumerator Move(Vector3 startPos, float startTime, float sec)
     {
-        base.Tirgger(startPos, curTime);
+        float elapsedTime = startTime;
+        Vector3 origPos = startPos;
+        Vector3 targetPos = Vector3.zero;
+
+        while (elapsedTime < sec)
+        {
+            transform.position = Vector3.LerpUnclamped(origPos, targetPos, EasingValue(elapsedTime / sec));
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime >= tirggerTiming && !isTirgger) Tirgger(transform.position, elapsedTime);
+            yield return null;
+        }
+
+        transform.position = targetPos;
+        DieDestory();
+    }
+
+    private void Tirgger(Vector3 startPos, float curTime)
+    {
+        isTirgger = true;
         StopCoroutine(startMove);
-        StartCoroutine(BezierMove(startPos, -transform.position, 0.5f, curTime));
+        StartCoroutine(BezierMove(startPos, -transform.position, moveTime, curTime));
     }
 
     private IEnumerator BezierMove(Vector3 startPos, Vector3 target, float sec, float curTime)
@@ -29,7 +51,7 @@ public class TirggerEnemy_Base : Enemy_Base
 
         while (elapsedTime < sec)
         {
-            transform.position = Bezier(origPos, targetPos, pos, Easing(elapsedTime / sec));
+            transform.position = Bezier(origPos, targetPos, pos, EasingValue(elapsedTime / sec));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
