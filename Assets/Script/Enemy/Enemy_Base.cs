@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Enemy_Base : MonoBehaviour
 {
     [HideInInspector] public float moveTime;
+    public bool isBenefit;
     public int curDir;
 
     protected Coroutine startMove;

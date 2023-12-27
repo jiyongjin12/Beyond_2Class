@@ -15,6 +15,11 @@ public class CheckBox : MonoBehaviour
     {
         var temp = other.GetComponent<Enemy_Base>();
 
-        if(temp.curDir == dir) temp.DieDestory();
+        if (temp.curDir == dir)
+            if (temp.isBenefit) Debug.Log("S_Good");
+            else Debug.Log("S_Bad");
+        else return;
+
+        temp.DieDestory();
     }
 }
