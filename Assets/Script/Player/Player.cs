@@ -29,7 +29,10 @@ public class Player : MonoBehaviour
     {
         var temp = other.GetComponent<Enemy_Base>();
 
-        if (temp.isBenefit) curHp += (hill / dieTime);
+        if (temp.isBenefit) {
+            curHp += (hill / dieTime);
+            if(curHp > 1) curHp = 1;
+        }
         else curHp -= (damage / dieTime);
 
         temp.DieDestory();
